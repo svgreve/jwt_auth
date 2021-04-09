@@ -10,6 +10,11 @@ use Mix.Config
 config :jwt_auth,
   ecto_repos: [JwtAuth.Repo]
 
+config :jwt_auth, JwtAuth.Repo,
+  migration_primary_key: [type: :binary_id],
+  migration_foreign_key: [type: :binary_id]
+
+
 # Configures the endpoint
 config :jwt_auth, JwtAuthWeb.Endpoint,
   url: [host: "localhost"],
