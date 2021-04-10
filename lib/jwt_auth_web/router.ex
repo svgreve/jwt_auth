@@ -19,6 +19,12 @@ defmodule JwtAuthWeb.Router do
     get "/", PageController, :index
   end
 
+  scope "/api", JwtAuthWeb do
+    pipe_through :api
+
+    post "/users", UserController, :create
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", JwtAuthWeb do
   #   pipe_through :api
