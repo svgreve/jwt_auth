@@ -1,5 +1,6 @@
 defmodule FallbackController do
-  use Phoenix.Controller
+  # use Phoenix.Controller
+  use JwtAuthWeb, :controller
 
   alias JwtAuthWeb.ErrorView
 
