@@ -1,5 +1,5 @@
 defmodule JwtAuth.Accounts.Users.Create do
-  alias JwtAuth.Repo
+  alias JwtAuth.{Error, Repo}
   alias JwtAuth.Accounts.User
 
   def call(params) do
@@ -11,8 +11,7 @@ defmodule JwtAuth.Accounts.Users.Create do
 
   defp handle_insert({:ok, %User{}} = result), do: result
 
-  defp handle_insert({:error, result})  do
-    {:error, %{status: :bad_request, result: result}}
+  defp handle_insert({:error, result}) do
+    {:error, Error.build(:bad_request, result)}
   end
-
 end
