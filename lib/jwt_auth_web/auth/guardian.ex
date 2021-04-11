@@ -4,7 +4,6 @@ defmodule JwtAuthWeb.Auth.Guardian do
   alias JwtAuth.Accounts.User
   alias JwtAuth.Accounts.Users.Get, as: UserGet
   alias JwtAuth.Error
-  # alias JwtAuthWeb.Auth.Guardian
 
   def subject_for_token(%User{id: id}, _claims), do: {:ok, id}
 
@@ -25,5 +24,5 @@ defmodule JwtAuthWeb.Auth.Guardian do
     end
   end
 
-  def authenticate(_), do: {:error, "Invalid or missing credentials."}
+  def authenticate(_), do: {:error, Error.build(:bad_request, "Invalid or missing credentials.")}
 end
