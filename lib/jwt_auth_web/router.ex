@@ -23,6 +23,7 @@ defmodule JwtAuthWeb.Router do
     pipe_through :api
 
     post "/users", UserController, :create
+    post "/users/signin", UserController, :signin
   end
 
   # Other scopes may use custom stacks.

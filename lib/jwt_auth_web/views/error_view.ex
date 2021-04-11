@@ -21,6 +21,9 @@ defmodule JwtAuthWeb.ErrorView do
   def render("error.json", %{result: %Changeset{} = changeset}) do
     %{message: translate_errors(changeset)}
   end
+  def render("error.json", %{result: result}) do
+    %{message: result}
+  end
 
   defp translate_errors(changeset) do
     traverse_errors(changeset, fn {msg, opts} ->
