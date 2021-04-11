@@ -14,6 +14,9 @@ config :jwt_auth, JwtAuth.Repo,
   migration_primary_key: [type: :binary_id],
   migration_foreign_key: [type: :binary_id]
 
+config :jwt_auth, JwtAuthWeb.Auth.Guardian,
+  issuer: "jwt_auth",
+  secret_key: "091/cxKEpVJSUAhqIR4XNQkTxZKNW/8o1AOP7cPHJB2188RUeE/Q86pP2mcf8heK"
 
 # Configures the endpoint
 config :jwt_auth, JwtAuthWeb.Endpoint,
