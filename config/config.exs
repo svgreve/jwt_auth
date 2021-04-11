@@ -18,6 +18,10 @@ config :jwt_auth, JwtAuthWeb.Auth.Guardian,
   issuer: "jwt_auth",
   secret_key: "091/cxKEpVJSUAhqIR4XNQkTxZKNW/8o1AOP7cPHJB2188RUeE/Q86pP2mcf8heK"
 
+config :jwt_auth, JwtAuthWeb.Auth.Pipeline,
+  module: JwtAuthWeb.Auth.Guardian,
+  error_handler: JwtAuthWeb.Auth.ErrorHandler
+
 # Configures the endpoint
 config :jwt_auth, JwtAuthWeb.Endpoint,
   url: [host: "localhost"],

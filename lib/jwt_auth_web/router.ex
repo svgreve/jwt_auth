@@ -1,6 +1,8 @@
 defmodule JwtAuthWeb.Router do
   use JwtAuthWeb, :router
 
+  alias JwtAuthWeb.Auth.Pipeline
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -13,6 +15,10 @@ defmodule JwtAuthWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :auth do
+    plug JwtAuthWeb.Auth.Pipeline
+  end
+
   scope "/", JwtAuthWeb do
     pipe_through :browser
 
@@ -22,8 +28,15 @@ defmodule JwtAuthWeb.Router do
   scope "/api", JwtAuthWeb do
     pipe_through :api
 
-    post "/users", UserController, :create
-    post "/users/signin", UserController, :signin
+    post "/accounts/signup", UserController, :create
+    post "/accounts/signin", UserController, :signin
+  end
+
+  scope "/api", JwtAuthWeb do
+    pipe_through [:api, :auth]
+
+    get "/accounts/:id", UserController, :get
+
   end
 
   # Other scopes may use custom stacks.

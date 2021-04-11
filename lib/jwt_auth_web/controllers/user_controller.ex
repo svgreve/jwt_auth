@@ -20,7 +20,15 @@ defmodule JwtAuthWeb.UserController do
     with {:ok, token} <- Guardian.authenticate(params) do
       conn
       |> put_status(:ok)
-      |> render("sign_in.json", token: token)
+      |> render("token.json", token: token)
+    end
+  end
+
+  def get(conn, %{"id" => id}) do
+    with {:ok, user} <- Accounts.get_user_by_id(id) do
+      conn
+      |> put_status(:ok)
+      |> render("user.json", user: user)
     end
   end
 end
