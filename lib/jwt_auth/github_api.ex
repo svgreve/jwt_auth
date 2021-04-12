@@ -1,10 +1,12 @@
 defmodule JwtAuth.GithubApi do
   alias JwtAuth.GithubApi.Client
+  alias JwtAuth.Error
 
   def user_repos(username) do
     case Client.user(username) do
       {:ok, repos}  -> {:ok, parse_repos(repos)}
-      {:error, status} -> {:error, %{status: status}}
+      # {:error, status} -> {:error, %{status: status}}
+      {:error, status} -> {:error, Error.build(status, "Github username not found")}
     end
   end
 

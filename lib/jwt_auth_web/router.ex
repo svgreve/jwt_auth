@@ -29,11 +29,12 @@ defmodule JwtAuthWeb.Router do
     post "/accounts/signup", UserController, :create
     post "/accounts/signin", UserController, :signin
   end
-
+""
   scope "/api", JwtAuthWeb do
     pipe_through [:api, :auth]
 
     get "/accounts/:id", UserController, :get
+    get "/github/:username", GithubController, :get_repos
 
   end
 
