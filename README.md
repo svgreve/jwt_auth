@@ -1,5 +1,23 @@
 # JwtAuth
 
+A aplicação possui dois contextos: 
+
+- accounts
+- github api 
+
+As rotas principais são:
+
+```
+user_path   POST  /api/accounts/signup          JwtAuthWeb.UserController :create
+user_path   POST  /api/accounts/signin          JwtAuthWeb.UserController :signin
+user_path   GET   /api/accounts/:id             JwtAuthWeb.UserController :get
+github_path GET   /api/github/:username         JwtAuthWeb.GithubController :get_repos
+```
+
+As rotas protegidas pelo Guardian são user_path => get e github_path => get_repos
+
+## Desafio Ignite
+
 Nesse desafio, você irá implementar uma nova feature para a aplicação desenvolvida no desafio [Consumindo APIs](https://www.notion.so/Desafio-01-Consumindo-APIs-59b66c4fc14147ff82a6e73b9ce23e85).
 A aplicação deve possuir uma entidade `User` onde cada usuário possuirá apenas um id e senha. Ao fazer uma requisição para a rota de criação de usuários, deve ser enviado apenas a senha a ser cadastrada para o novo usuário, já o id deverá ser gerado pelo servidor e retornado no corpo da resposta.
 
