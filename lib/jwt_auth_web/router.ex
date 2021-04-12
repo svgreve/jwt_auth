@@ -1,8 +1,6 @@
 defmodule JwtAuthWeb.Router do
   use JwtAuthWeb, :router
 
-  alias JwtAuthWeb.Auth.Pipeline
-
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session

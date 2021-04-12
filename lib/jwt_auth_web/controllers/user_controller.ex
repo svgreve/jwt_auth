@@ -24,7 +24,7 @@ defmodule JwtAuthWeb.UserController do
     end
   end
 
-  def get(conn, %{"id" => id}) do
+  def get(conn, %{"id" => id} = params) do
     with {:ok, user} <- Accounts.get_user_by_id(id) do
       conn
       |> put_status(:ok)
