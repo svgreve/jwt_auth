@@ -16,7 +16,7 @@ defmodule JwtAuthWeb.Auth.Guardian do
   def authenticate(%{"id" => id, "password" => password}) do
     with {:ok, %User{password_hash: hash} = user} <- UserGet.by_id(id),
          true <- Pbkdf2.verify_pass(password, hash),
-         {:ok, token, _claims} <- encode_and_sign(user) do
+         {:ok, token, _claims} <- encode_and_sign(user, %{}, ttl: {1, :minute}) do
       {:ok, token}
     else
       false -> {:error, Error.build(:unauthorized, "Please, check your credentials.")}

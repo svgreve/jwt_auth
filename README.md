@@ -16,7 +16,7 @@ github_path GET   /api/github/:username         JwtAuthWeb.GithubController :get
 
 As rotas protegidas pelo Guardian são user_path => get e github_path => get_repos
 
-## Desafio Ignite
+## Desafio Ignite 1
 
 Nesse desafio, você irá implementar uma nova feature para a aplicação desenvolvida no desafio [Consumindo APIs](https://www.notion.so/Desafio-01-Consumindo-APIs-59b66c4fc14147ff82a6e73b9ce23e85).
 A aplicação deve possuir uma entidade `User` onde cada usuário possuirá apenas um id e senha. Ao fazer uma requisição para a rota de criação de usuários, deve ser enviado apenas a senha a ser cadastrada para o novo usuário, já o id deverá ser gerado pelo servidor e retornado no corpo da resposta.
@@ -38,6 +38,22 @@ Para realizar a autenticação, deve ser enviado no corpo da requisição o id e
 Você pode usar a biblioteca Guardian para trabalhar com autenticação JWT: [https://github.com/ueberauth/guardian](https://github.com/ueberauth/guardian)
 
 Ao chamar a rota que lista os repositórios de um usuário, será necessário enviar também o token JWT de um usuário que se autenticou na aplicação. Ou seja, apenas usuários cadastrados na aplicação podem fazer a listagem de repositórios.
+
+## Desafio Ignite 2
+
+Continuando com o código implementado no desafio [Autenticação JWT](https://www.notion.so/Desafio-01-Autentica-o-JWT-5c2fd6b53afb41b8b9f053deedecdf2f), você deverá customizar o tempo de validade de um token para um minuto e renovar ele a cada requisição feita desde que ainda esteja válido.
+
+1 - Para alterar a duração do token, veja a opção `:ttl` na documentação oficial da função `encode_and_sign/4`: [https://hexdocs.pm/guardian/Guardian.html#encode_and_sign/4](https://hexdocs.pm/guardian/Guardian.html#encode_and_sign/4)
+
+2 - Para renovar um token, confira a documentação da função `refresh/3`:
+   [https://hexdocs.pm/guardian/Guardian.Token.Jwt.html#refresh/3](https://hexdocs.pm/guardian/Guardian.Token.Jwt.html#refresh/3)
+
+Exemplo:
+
+```elixir
+# Refresh a token before it expires
+{:ok, _old_stuff, {new_token, new_claims}} = MyApp.Guardian.refresh(token)
+```
 
 ---
 
