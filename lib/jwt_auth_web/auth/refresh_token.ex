@@ -8,18 +8,14 @@ defmodule JwtAuthWeb.Auth.RefreshToken do
 
   def init(default), do: default
 
-  # def call(%Conn{} = conn, _default) do
-  #   "Bearer " <> token = Conn.get_req_header(conn, :authorization)
-  #   {:ok, _old_stuff, {new_token, _new_claims}} = Guardian.refresh(token, ttl: {1, :minute})
-  #   conn |> put_private(:token, new_token)
-  #   conn
-  # end
-
   def call(%Conn{} = conn, _default) do
     authorization = Conn.get_req_header(conn, "authorization")
-    IO.inspect authorization
+    IO.inspect(authorization)
     ["Bearer " <> token] = authorization
-    {:ok, _old_stuff, {new_token, _new_claims}} = Guardian.refresh(token, ttl: {@ttl_minutes, :minute})
+
+    {:ok, _old_stuff, {new_token, _new_claims}} =
+      Guardian.refresh(token, ttl: {@ttl_minutes, :minute})
+
     conn |> put_private(:token, new_token)
   end
 end
