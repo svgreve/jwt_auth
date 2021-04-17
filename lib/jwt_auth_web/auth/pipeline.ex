@@ -5,5 +5,4 @@ defmodule JwtAuthWeb.Auth.Pipeline do
   plug Guardian.Plug.EnsureAuthenticated
   plug Guardian.Plug.LoadResource
   plug JwtAuthWeb.Auth.RefreshToken
-
 end

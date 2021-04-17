@@ -7,9 +7,11 @@ defmodule JwtAuthWeb.UserController do
 
   action_fallback FallbackController
 
+  @ttl_minutes 5
+
   def create(conn, params) do
     with {:ok, %User{} = user} <- Accounts.create_user(params),
-         {:ok, token, _claims} <- Guardian.encode_and_sign(user, %{}, ttl: {1, :minute}) do
+         {:ok, token, _claims} <- Guardian.encode_and_sign(user, %{}, ttl: {@ttl_minutes, :minute}) do
       conn
       |> put_status(:created)
       |> render("create.json", token: token, user: user)
@@ -24,11 +26,11 @@ defmodule JwtAuthWeb.UserController do
     end
   end
 
-  def get(conn, %{"id" => id} = params) do
+  def get(conn, %{"id" => id}) do
     with {:ok, user} <- Accounts.get_user_by_id(id) do
       conn
       |> put_status(:ok)
-      |> render("user.json", user: user)
+      |> render("user.json", %{user: user,  token: conn.private.token})
     end
   end
 end

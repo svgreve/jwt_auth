@@ -5,7 +5,7 @@ defmodule JwtAuthWeb.GithubController do
 
   def get_repos(conn, %{"username" => username}) do
     with {:ok, repos} <- JwtAuth.GithubApi.user_repos(username) do
-      render(conn, "repos.json", repos: repos)
+      render(conn, "repos.json", %{repos: repos, token: conn.private.token})
     end
   end
 end

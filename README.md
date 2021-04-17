@@ -16,6 +16,8 @@ github_path GET   /api/github/:username         JwtAuthWeb.GithubController :get
 
 As rotas protegidas pelo Guardian são user_path => get e github_path => get_repos
 
+> Os tokens expiram após 5 minutos. Novos tokens são enviados em cada requisição nas rotas protegidas e podem ser utilizados nas novas chamadas. Caso o retorno seja de token inválido será necessário uma nova chamada de sign-in.
+
 ## Desafio Ignite 1
 
 Nesse desafio, você irá implementar uma nova feature para a aplicação desenvolvida no desafio [Consumindo APIs](https://www.notion.so/Desafio-01-Consumindo-APIs-59b66c4fc14147ff82a6e73b9ce23e85).

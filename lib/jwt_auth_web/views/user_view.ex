@@ -13,5 +13,5 @@ defmodule JwtAuthWeb.UserView do
 
   def render("token.json", %{token: token}), do: %{token: token}
 
-  def render("user.json", %{user: user}), do: %{user: user}
+  def render("user.json", %{user: user,  token: token}), do: %{user: user,  token: token}
 end
